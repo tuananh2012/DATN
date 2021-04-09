@@ -4,12 +4,12 @@ import matplotlib.pyplot as plt
  
 #Simulation window parameters
 xMin=0;xMax=25000
-yMin=0;yMax=1000000
+yMin=0;yMax=10000000
 xDelta=xMax-xMin;yDelta=yMax-yMin #rectangle dimensions
 areaTotal=xDelta*yDelta
  
 #Point process parameters
-lambda0=0.000000005 #intensity (ie mean density) of the Poisson process
+lambda0=0.000000005 #intensity (ie mean density) of the Poisson process./
  
 #Simulate Poisson point process
 f = open("data.txt", "w")

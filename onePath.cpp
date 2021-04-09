@@ -1,50 +1,64 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
-const int length = 1e6;// length of the road
+const int length = 10000000;// length of the road
 const int width = 25000;// width of the road
-const int r = 50000; // R_0
-const double lambda = 0.000000005;
+const int radius = 100000; // R_0
+double lambda = 0.000000005;
 const double PI = 3.141592654;
 const int k_max = 50;
+vector<pair<ll,ll>> generateRandom(int numOfPoints){
+    vector<pair<ll,ll>> ans(numOfPoints);
+    random_device rd;
+  /* Random number generator */
+  default_random_engine generator(rd());
+  /* Distribution on which to apply the generator */
+  uniform_int_distribution<long long unsigned> distribution(0,0xFFFFFFFFFFFFFFFF);
+    for (int i = 0; i < numOfPoints; i++) {
+      int x = distribution(generator) % (radius * 2 + width);
+      int y = distribution(generator) % (length +2 * radius);
+      x -= radius;
+      y-= radius;
+      
+      ans[i] = {x,y};
+  }
+  return ans;
+}
 double dientichcungtron(int x){
-    if(x >= r) return 0;
-    double alpha = acos((double)x/r);
-    return alpha * r * r - sin(alpha) * x * r;
+    if(x >= radius) return 0;
+    double alpha = acos((double)x/radius);
+    return (alpha * radius  - sin(alpha) * x )* radius;
 }
 double calculateArea(int x){
-   if(x <= 0 && x+r < width) return dientichcungtron(-x);
-   else if( x <= 0 && x + r >= width) return dientichcungtron(-x) - dientichcungtron(width-x);
-   else if(x > 0)  return PI * r * r - dientichcungtron(x) - dientichcungtron(width - x);
+   if(x <= 0 && x + radius < width) return dientichcungtron(-x);
+   else if( x <= 0 && x + radius >= width) return dientichcungtron(-x) - dientichcungtron(width-x);
+   else if(x > 0)  return PI * radius * radius - dientichcungtron(x) - dientichcungtron(width - x);
 }
 double calculateProbability(double p, int x){
    double base = lambda * calculateArea(x);
    double ans = exp(-base);
-   double cur = ans;   
-   for(int k = 1;k < k_max;k++){
-       cur = cur * (base * (1-p))/k;
+   double cur = ans;
+   for (int i = 1; i < k_max; i++)
+   {
+       cur *= (base * (1.0-p))/i;
        ans += cur;
    }
-   cout << ans << endl;
-   return ans;
+   
+ //  cout << ans << endl;
+   return  (double)1 - ans;
 }
+ 
 double integral(double p){
     double ans = 0;
-    for(int x = - r + 1; x <= width/2;x++){
-        ans += (1- calculateProbability(p,x));
+    for(int x = -radius + 1; x <= width/2;x++){
+        ans += calculateProbability(p,x);
     }
-    return 2 * ans/(2*r + width);
+ //   cout << ans << endl;
+    return 2 * ans/(2*radius + width) * ((double)length/(length+ 2 * radius));
 }
 double check(double p, int numOfPoints){
     int ans = 0, totalPoint = 0;
-    vector<pair<ll,ll>> points(numOfPoints);
-    srand(time(NULL));
-    for(int i = 0; i < numOfPoints;i++){
-        int x = rand() % ((r<<1)+width);
-        x-=r;
-        int y = rand() % (length);
-        points[i]={x,y};
-    }
+    vector<pair<ll,ll>> points = generateRandom(numOfPoints);
     freopen("data.txt","r",stdin);
     int numOfTest;
     cin >> numOfTest;
@@ -64,7 +78,7 @@ double check(double p, int numOfPoints){
             for (int i = 0; i < numOfPoints; i++)
             {
                 if(!inside[i]){
-                    if((x-points[i].first) * (x - points[i].first) + (y-points[i].second) * (y-points[i].second) <= (ll) r * r ){
+                    if((x-points[i].first) * (x - points[i].first) + (y-points[i].second) * (y-points[i].second) <= (ll) radius * radius ){
                         ans++;
                         inside[i]  = true;
                     }
@@ -74,9 +88,30 @@ double check(double p, int numOfPoints){
     }
     return (double)ans/totalPoint;
 }
+double findBestProb(float expo){
+    double best_ans = 0, best_prob = 0.01;
+    for(double p = 0.01 ; p <= 1.0; p += 0.01){
+        double cur = integral(p)/pow(p,expo);
+        if(cur > best_ans){
+            best_ans = cur;
+            best_prob = p;
+        }
+    }
+    return best_prob;
+}
 int main(){
+    double area = dientichcungtron(radius/sqrt(2));
+    area = (double)radius * radius - area;
+    double res =(double) (width + 2 * radius) * (length + 2 * radius);
+    res = res/(res - 4 * area);
     // cout << calculateArea(10000);
-    cout << integral(1) << endl << check(1,1000);
+    freopen("output.txt","w",stdout);
+    for(double numCar = 10; numCar < 3000; numCar++){
+        lambda = numCar/length/width;
+        double ans = findBestProb(0.3);
+        cout << numCar << " " << ans << " " << integral(ans) * res << endl; 
+    }
+    
 
-
+    
 }
