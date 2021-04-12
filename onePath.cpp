@@ -4,9 +4,9 @@ using namespace std;
 const int length = 10000000;// length of the road
 const int width = 25000;// width of the road
 const int radius = 100000; // R_0
-double lambda = 0.000000005;
+double lambda = 0.0000000005;
 const double PI = 3.141592654;
-const int k_max = 50;
+const int k_max = 100;
 vector<pair<ll,ll>> generateRandom(int numOfPoints){
     vector<pair<ll,ll>> ans(numOfPoints);
     random_device rd;
@@ -47,11 +47,16 @@ double calculateProbability(double p, int x){
  //  cout << ans << endl;
    return  (double)1 - ans;
 }
+double test(double p,int x){
+    double base = lambda * calculateArea(x);
+    if(p==1.0) return 1-exp(-base);
+    else return 1-exp(-base*p);
+}
  
 double integral(double p){
     double ans = 0;
     for(int x = -radius + 1; x <= width/2;x++){
-        ans += calculateProbability(p,x);
+        ans += test(p,x);
     }
  //   cout << ans << endl;
     return 2 * ans/(2*radius + width) * ((double)length/(length+ 2 * radius));
@@ -88,30 +93,40 @@ double check(double p, int numOfPoints){
     }
     return (double)ans/totalPoint;
 }
-double findBestProb(float expo){
-    double best_ans = 0, best_prob = 0.01;
-    for(double p = 0.01 ; p <= 1.0; p += 0.01){
-        double cur = integral(p)/pow(p,expo);
-        if(cur > best_ans){
-            best_ans = cur;
-            best_prob = p;
+double cal(double l){
+    return integral(l)/( 2*l +  2* pow(l,0.06));
+    //2*l + sqrt(l) + sqrt(sqrt(l)) +
+}
+double findBestProb(){
+    double l= 0.00001,r=0.9999;
+    double derivatestep = 0.0000001;
+    double lans = cal(l);
+    double rans = cal(r);   
+    int time = 20;
+    while (time--)
+    {
+        auto mid = (l+r)/2;
+        double midans = cal(mid);
+        if(midans < cal(mid + derivatestep)){
+            lans = midans;
+            l = mid;
+        }
+        else{
+            rans = midans;
+            r = mid;
         }
     }
-    return best_prob;
+    return r;
 }
 int main(){
     double area = dientichcungtron(radius/sqrt(2));
     area = (double)radius * radius - area;
     double res =(double) (width + 2 * radius) * (length + 2 * radius);
     res = res/(res - 4 * area);
-    // cout << calculateArea(10000);
     freopen("output.txt","w",stdout);
-    for(double numCar = 10; numCar < 3000; numCar++){
+    for(double numCar = 100; numCar < 3000; numCar+=50){
         lambda = numCar/length/width;
-        double ans = findBestProb(0.3);
-        cout << numCar << " " << ans << " " << integral(ans) * res << endl; 
+        double ans = findBestProb();
+        cout << numCar << " " << ans * numCar << " " << integral(ans) * res << endl; 
     }
-    
-
-    
 }
