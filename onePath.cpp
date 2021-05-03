@@ -4,7 +4,7 @@ using namespace std;
 const int length = 10000000;// length of the road
 const int width = 25000;// width of the road
 const int radius = 100000; // R_0
-double lambda = 0.0000000005;
+double lambda = 0.0000000002;
 const double PI = 3.141592654;
 const int k_max = 100;
 double dientichcungtron(int x){
@@ -40,10 +40,13 @@ double integral(double p){
         ans += test(p,x);
     }
  //   cout << ans << endl;
-    return 2 * ans/(2*radius + width) * ((double)length/(length+ 2 * radius));
+    return 2 * ans * (length - 2 * radius);
+}
+double costFunction(double p){
+    return sqrt(sqrt(p));
 }
 double cal(double l){
-    return integral(l)/( 2*l +  2* pow(l,0.06));
+    return integral(l)/costFunction(l);
     //2*l + sqrt(l) + sqrt(sqrt(l)) +
 }
 double findBestProb(){
@@ -70,9 +73,9 @@ double findBestProb(){
 void onePath(){
     double area = dientichcungtron(radius/sqrt(2));
     area = (double)radius * radius - area;
-    double res =(double) (width + 2 * radius) * (length + 2 * radius);
+    double res =(double) (width + 2 * radius) * (length - 2 * radius);
     res = res/(res - 4 * area);
-    freopen("output.txt","w",stdout);
+    //freopen("output.txt","w",stdout);
     for(double numCar = 100; numCar < 4000; numCar+=50){
         lambda = numCar/length/width;
         double ans = findBestProb();
@@ -80,4 +83,5 @@ void onePath(){
     }
 }
 int main(){
+    cout << findBestProb() << endl;
 }
