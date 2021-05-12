@@ -18,7 +18,7 @@ vector<pair<ll,ll>> generateRandom(int numOfPoints){
       int x = distribution(generator) % (radius * 2 + width);
       int y = distribution(generator) % (length  + 2 * radius);
       x -= radius;
-      y-= radius;
+      y -= radius;
       ans[i] = {x,y};
   }
   return ans;

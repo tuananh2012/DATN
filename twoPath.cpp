@@ -8,34 +8,36 @@ double lambda1 = 0.0000000008;
 double lambda2 = 0.000000002;
 const double PI = 3.141592654;
 const int k_max = 100;
-const int distanceBetweenRoads = 100000;
+const int distanceBetweenRoads = 125000;
 double xxx;
-#define rand_01 ((float)rand() / (float)RAND_MAX)
+float nbCarInRoad1, nbCarInRoad2;
+#define rand_01 ((float)rand() / RAND_MAX)
 
 const int numofdims = 2;
-const int numofparticles = 50;
+const int numofparticles = 30;
 double integral(double p1, double p2);
 double costFunction(double p1, double p2);
+double targetFunction(double p1, double p2);
 void fitnessfunc(float X[numofparticles][numofdims], float fitnesses[numofparticles])
 {
-    memset(fitnesses, 0, sizeof (float) * numofparticles);
-    for(int i = 0; i < numofparticles; i++)
+    memset(fitnesses, 0, sizeof(float) * numofparticles);
+    for (int i = 0; i < numofparticles; i++)
     {
-        fitnesses[i] = integral(X[i][0],X[i][1])/costFunction(X[i][0],X[i][1]);
+        fitnesses[i] = targetFunction(X[i][0], X[i][1]);
     }
 }
 float mean(float inputval[], int vallength)
 {
     int addvalue = 0;
-    for(int i = 0; i < vallength; i++)
+    for (int i = 0; i < vallength; i++)
     {
         addvalue += inputval[i];
     }
     return (float)(addvalue / vallength);
 }
 void PSO(int numofiterations, float c1, float c2,
-              float Xmin[numofdims], float Xmax[numofdims], float initialpop[numofparticles][numofdims],
-              float worsts[], float meanfits[], float bests[], float *gbestfit, float gbest[numofdims])
+         float Xmin[numofdims], float Xmax[numofdims], float initialpop[numofparticles][numofdims],
+         float worsts[], float meanfits[], float bests[], float *gbestfit, float gbest[numofdims])
 {
     float V[numofparticles][numofdims] = {0};
     float X[numofparticles][numofdims];
@@ -46,7 +48,7 @@ void PSO(int numofiterations, float c1, float c2,
     float fitnesses[numofparticles];
     float w;
     float minfit;
-    int   minfitidx;
+    int minfitidx;
 
     memcpy(X, initialpop, sizeof(float) * numofparticles * numofdims);
     fitnessfunc(X, fitnesses);
@@ -55,38 +57,38 @@ void PSO(int numofiterations, float c1, float c2,
     *gbestfit = minfit;
     memcpy(gbest, X[minfitidx], sizeof(float) * numofdims);
 
-    for(int i = 0; i < numofdims; i++)
+    for (int i = 0; i < numofdims; i++)
     {
         Vmax[i] = 0.2 * (Xmax[i] - Xmin[i]);
         Vmin[i] = -Vmax[i];
     }
 
-    for(int t = 0; t < numofiterations; t++)
+    for (int t = 0; t < numofiterations; t++)
     {
         w = 0.9 - 0.7 * t / numofiterations;
 
-        for(int i = 0; i < numofparticles; i++)
+        for (int i = 0; i < numofparticles; i++)
         {
-            if(fitnesses[i] > pbestfits[i])
+            if (fitnesses[i] > pbestfits[i])
             {
                 pbestfits[i] = fitnesses[i];
                 memcpy(pbests[i], X[i], sizeof(float) * numofdims);
             }
         }
-        for(int i = 0; i < numofparticles; i++)
+        for (int i = 0; i < numofparticles; i++)
         {
-            for(int j = 0; j < numofdims; j++)
+            for (int j = 0; j < numofdims; j++)
             {
-                V[i][j] = min(max((w * V[i][j] + rand_01 * c1 * (pbests[i][j] - X[i][j])
-                                   + rand_01 * c2 * (gbest[j] - X[i][j])), Vmin[j]), Vmax[j]);
+                V[i][j] = min(max((w * V[i][j] + rand_01 * c1 * (pbests[i][j] - X[i][j]) + rand_01 * c2 * (gbest[j] - X[i][j])), Vmin[j]), Vmax[j]);
                 X[i][j] = min(max((X[i][j] + V[i][j]), Xmin[j]), Xmax[j]);
+                cout <<"lol" <<  V[i][j] << endl;
             }
         }
 
         fitnessfunc(X, fitnesses);
         minfit = *max_element(fitnesses, fitnesses + numofparticles);
         minfitidx = max_element(fitnesses, fitnesses + numofparticles) - fitnesses;
-        if(minfit > *gbestfit)
+        if (minfit > *gbestfit)
         {
             *gbestfit = minfit;
             memcpy(gbest, X[minfitidx], sizeof(float) * numofdims);
@@ -94,11 +96,9 @@ void PSO(int numofiterations, float c1, float c2,
 
         //worsts[t] = *min_element(fitnesses, fitnesses + numofparticles);
         bests[t] = *gbestfit;
-       // meanfits[t] = mean(fitnesses, numofparticles);
-        cout << gbest[0] << " " << gbest[1] << endl;
+        // meanfits[t] = mean(fitnesses, numofparticles);
+        // cout << gbest[0] << " " << gbest[1] << endl;
     }
-
-
 }
 double S(int x)
 {
@@ -127,7 +127,7 @@ pair<double, double> calculateArea(int x)
     }
     else
     {
-        auto ans = calculateArea( 2 * width + distanceBetweenRoads - x);
+        auto ans = calculateArea(2 * width + distanceBetweenRoads - x);
         return {ans.second, ans.first};
     }
 }
@@ -135,23 +135,25 @@ double calculateProb(double p1, double p2, int x)
 {
     auto val = calculateArea(x);
     double base1 = p1 * val.first * lambda1, base2 = p2 * val.second * lambda2;
-    return 1 - exp( -base1) * exp( -base2);
+    return 1 - exp(-base1 - base2);
 }
 double integral(double p1, double p2)
 {
     double ans = 0;
-    for (int i = 1 - radius; i < radius + 2 * width + distanceBetweenRoads; i++)
+    for (int i = 1 - radius; i < radius + 2 * width + distanceBetweenRoads; i += 10)
     {
-        ans += calculateProb(p1, p2, i);
+        auto xx = calculateProb(p1,p2,i+5) ;
+        ans += calculateProb(p1, p2, i + 5) * 10;
     }
-    return ans;
+    return ans / (2 * radius + 2 * width + distanceBetweenRoads);
 }
 double costFunction(double p1, double p2)
 {
-    return sqrt(sqrt(p1)) + sqrt(sqrt(p2)) ;
+    return (p1 + 2) * (p2 + 2);
 }
-double targetFunction(double p1,double p2){
-    return integral(p1,p2)/costFunction(p1,p2);
+double targetFunction(double p1, double p2)
+{
+    return integral(p1, p2) / costFunction(p1, p2);
 }
 void twopath()
 {
@@ -169,7 +171,37 @@ void twopath()
             }
         }
     }
-    cout << bestp1 << " " << bestp2 << " " << integral(bestp1, bestp2) * xxx;
+    // freopen("brute_force.txt","a",stdout);
+    cout << "number of cars in road1 is :" << nbCarInRoad1 << " number of cars in road2 is :" << nbCarInRoad2 << endl;
+    cout << "fitness: " << targetFunction(bestp1, bestp2) << " with prob1: " << bestp1 << " prob2 : " << bestp2 << endl;
+    // fclose(stdout);
+}
+void run()
+{
+    time_t t;
+    srand((unsigned)time(&t));
+
+    float xmin[numofdims], xmax[numofdims];
+    float initpop[numofparticles][numofdims];
+    float worsts[100], bests[100];
+    float meanfits[100];
+    float gbestfit;
+    float gbest[numofdims];
+    for (int i = 0; i < numofdims; i++)
+    {
+        xmax[i] = 1;
+        xmin[i] = 0.001;
+    }
+    for (int i = 0; i < numofparticles; i++)
+        for (int j = 0; j < numofdims; j++)
+        {
+            initpop[i][j] = rand_01 * (xmax[i] - xmin[i]) + xmin[i];
+        }
+    PSO(20, 0.5, 0.5, xmin, xmax, initpop, worsts, meanfits, bests, &gbestfit, gbest);
+    //  freopen("PSO_Output.txt","a",stdout);
+    cout << "number of cars in road1 is :" << nbCarInRoad1 << " number of cars in road2 is :" << nbCarInRoad2 << endl;
+    cout << "fitness: " << targetFunction(gbest[0], gbest[1]) << " with prob1: " << gbest[0] << " prob2 : " << gbest[1] << endl;
+    //  fclose(stdout);
 }
 
 int main()
@@ -179,29 +211,15 @@ int main()
     double res = (double)(2 * width + 2 * radius + distanceBetweenRoads) * (length - 2 * radius);
     res = res - 4 * area;
     xxx = (length - 2 * radius) / res;
-    time_t t;
-    srand((unsigned) time(&t));
-
-    float xmin[numofdims], xmax[numofdims];
-    float initpop[numofparticles][numofdims];
-    float worsts[1000], bests[1000];
-    float meanfits[1000];
-    float gbestfit;
-    float gbest[2];
-    for(int i = 0; i < 2; i++)
-    {
-        xmax[i] = 1;
-        xmin[i] = 0.1; 
-    }
-    for(int i = 0; i < numofparticles; i++)
-        for(int j = 0; j < numofdims; j++)
-        {
-            initpop[i][j] = rand_01 * (xmax[i]-xmin[i]) + xmin[i];
-        }
-
-    PSO(100, 0.1, 0.1, xmin, xmax, initpop, worsts, meanfits, bests, &gbestfit, gbest);
-
-    cout<<"fitness: "<< integral(gbest[0],gbest[1]) * xxx << " " << gbest[0] << " " << gbest[1] <<  endl;
-    twopath();
+    // for(nbCarInRoad1 = 500; nbCarInRoad1 <= 3000; nbCarInRoad1 += 50){
+    //     lambda1 = nbCarInRoad1/((double)length * width);
+    //     for(nbCarInRoad2 = 200; nbCarInRoad2 <= nbCarInRoad1; nbCarInRoad2 += 50){
+    //         lambda2 = nbCarInRoad2/((double)length * width);
+    //         run();
+    //         twopath();
+    //     }
+    // }
+    run();
+    cout << calculateProb(90000,0.5,0.5);
     return 0;
 }

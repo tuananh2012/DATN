@@ -1,0 +1,236 @@
+number of cars in road1 is :500 number of cars in road2 is :200
+fitness: 0.677239 with prob1: 0.2 prob2 : 0.2
+number of cars in road1 is :500 number of cars in road2 is :250
+fitness: 0.716595 with prob1: 0.2 prob2 : 0.2
+number of cars in road1 is :500 number of cars in road2 is :300
+fitness: 0.749993 with prob1: 0.2 prob2 : 0.2
+number of cars in road1 is :500 number of cars in road2 is :350
+fitness: 0.778383 with prob1: 0.2 prob2 : 0.2
+number of cars in road1 is :500 number of cars in road2 is :200
+fitness: 3.97082 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :500 number of cars in road2 is :250
+fitness: 4.23254 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :500 number of cars in road2 is :300
+fitness: 4.4734 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :500 number of cars in road2 is :350
+fitness: 4.69514 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :500 number of cars in road2 is :400
+fitness: 4.89937 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :500 number of cars in road2 is :450
+fitness: 5.08754 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :500 number of cars in road2 is :500
+fitness: 5.26099 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :550 number of cars in road2 is :200
+fitness: 4.13453 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :550 number of cars in road2 is :250
+fitness: 4.39556 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :550 number of cars in road2 is :300
+fitness: 4.63575 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :550 number of cars in road2 is :350
+fitness: 4.85685 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :550 number of cars in road2 is :400
+fitness: 5.06046 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :550 number of cars in road2 is :450
+fitness: 5.24805 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :550 number of cars in road2 is :500
+fitness: 5.42093 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :550 number of cars in road2 is :550
+fitness: 5.58034 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :600 number of cars in road2 is :200
+fitness: 4.28571 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :600 number of cars in road2 is :250
+fitness: 4.54607 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :600 number of cars in road2 is :300
+fitness: 4.78561 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :600 number of cars in road2 is :350
+fitness: 5.0061 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :600 number of cars in road2 is :400
+fitness: 5.20913 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :600 number of cars in road2 is :450
+fitness: 5.39615 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :600 number of cars in road2 is :500
+fitness: 5.5685 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :600 number of cars in road2 is :550
+fitness: 5.72739 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :600 number of cars in road2 is :600
+fitness: 5.87395 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :650 number of cars in road2 is :200
+fitness: 4.42539 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :650 number of cars in road2 is :250
+fitness: 4.6851 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :650 number of cars in road2 is :300
+fitness: 4.92403 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :650 number of cars in road2 is :350
+fitness: 5.14393 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :650 number of cars in road2 is :400
+fitness: 5.34639 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :650 number of cars in road2 is :450
+fitness: 5.53287 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :650 number of cars in road2 is :500
+fitness: 5.70471 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :650 number of cars in road2 is :550
+fitness: 5.86311 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :650 number of cars in road2 is :600
+fitness: 6.00919 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :650 number of cars in road2 is :650
+fitness: 6.14398 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :700 number of cars in road2 is :200
+fitness: 4.5545 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :700 number of cars in road2 is :250
+fitness: 4.81359 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :700 number of cars in road2 is :300
+fitness: 5.05193 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :700 number of cars in road2 is :350
+fitness: 5.27126 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :700 number of cars in road2 is :400
+fitness: 5.47319 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :700 number of cars in road2 is :450
+fitness: 5.65915 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :700 number of cars in road2 is :500
+fitness: 5.83049 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :700 number of cars in road2 is :550
+fitness: 5.98841 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :700 number of cars in road2 is :600
+fitness: 6.13405 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :700 number of cars in road2 is :650
+fitness: 6.2684 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :700 number of cars in road2 is :700
+fitness: 6.3924 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :750 number of cars in road2 is :200
+fitness: 4.67391 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :750 number of cars in road2 is :250
+fitness: 4.9324 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :750 number of cars in road2 is :300
+fitness: 5.17018 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :750 number of cars in road2 is :350
+fitness: 5.38897 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :750 number of cars in road2 is :400
+fitness: 5.59037 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :750 number of cars in road2 is :450
+fitness: 5.77584 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :750 number of cars in road2 is :500
+fitness: 5.9467 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :750 number of cars in road2 is :550
+fitness: 6.10417 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :750 number of cars in road2 is :600
+fitness: 6.24937 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :750 number of cars in road2 is :650
+fitness: 6.3833 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :750 number of cars in road2 is :700
+fitness: 6.50691 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :750 number of cars in road2 is :750
+fitness: 6.62103 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :800 number of cars in road2 is :200
+fitness: 4.78441 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :800 number of cars in road2 is :250
+fitness: 5.04233 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :800 number of cars in road2 is :300
+fitness: 5.27956 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :800 number of cars in road2 is :350
+fitness: 5.49783 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :800 number of cars in road2 is :400
+fitness: 5.69873 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :800 number of cars in road2 is :450
+fitness: 5.88372 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :800 number of cars in road2 is :500
+fitness: 6.05412 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :800 number of cars in road2 is :550
+fitness: 6.21116 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :800 number of cars in road2 is :600
+fitness: 6.35594 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :800 number of cars in road2 is :650
+fitness: 6.48947 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :800 number of cars in road2 is :700
+fitness: 6.61269 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :800 number of cars in road2 is :750
+fitness: 6.72645 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :800 number of cars in road2 is :800
+fitness: 6.83152 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :850 number of cars in road2 is :200
+fitness: 4.88672 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :850 number of cars in road2 is :250
+fitness: 5.14409 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :850 number of cars in road2 is :300
+fitness: 5.38079 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :850 number of cars in road2 is :350
+fitness: 5.59856 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :850 number of cars in road2 is :400
+fitness: 5.79898 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :850 number of cars in road2 is :450
+fitness: 5.98351 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :850 number of cars in road2 is :500
+fitness: 6.15348 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :850 number of cars in road2 is :550
+fitness: 6.3101 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :850 number of cars in road2 is :600
+fitness: 6.45447 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :850 number of cars in road2 is :650
+fitness: 6.58763 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :850 number of cars in road2 is :700
+fitness: 6.71048 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :850 number of cars in road2 is :750
+fitness: 6.82389 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :850 number of cars in road2 is :800
+fitness: 6.92862 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :850 number of cars in road2 is :850
+fitness: 7.0254 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :900 number of cars in road2 is :200
+fitness: 4.98151 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :900 number of cars in road2 is :250
+fitness: 5.23835 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :900 number of cars in road2 is :300
+fitness: 5.47454 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :900 number of cars in road2 is :350
+fitness: 5.69182 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :900 number of cars in road2 is :400
+fitness: 5.89179 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :900 number of cars in road2 is :450
+fitness: 6.07588 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :900 number of cars in road2 is :500
+fitness: 6.24542 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :900 number of cars in road2 is :550
+fitness: 6.40164 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :900 number of cars in road2 is :600
+fitness: 6.54563 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :900 number of cars in road2 is :650
+fitness: 6.67841 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :900 number of cars in road2 is :700
+fitness: 6.80091 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :900 number of cars in road2 is :750
+fitness: 6.91398 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :900 number of cars in road2 is :800
+fitness: 7.0184 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :900 number of cars in road2 is :850
+fitness: 7.11486 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :900 number of cars in road2 is :900
+fitness: 7.20403 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :950 number of cars in road2 is :200
+fitness: 5.06938 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :950 number of cars in road2 is :250
+fitness: 5.3257 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :950 number of cars in road2 is :300
+fitness: 5.56141 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :950 number of cars in road2 is :350
+fitness: 5.77823 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :950 number of cars in road2 is :400
+fitness: 5.97774 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :950 number of cars in road2 is :450
+fitness: 6.16141 with prob1: 0.1 prob2 : 0.1
+number of cars in road1 is :500 number of cars in road2 is :200
+fitness: 0.0282626 with prob1: 0.4 prob2 : 0.7
+number of cars in road1 is :500 number of cars in road2 is :250
+fitness: 0.0289994 with prob1: 0.4 prob2 : 0.6
+number of cars in road1 is :500 number of cars in road2 is :300
+fitness: 0.0295267 with prob1: 0.4 prob2 : 0.5
+number of cars in road1 is :500 number of cars in road2 is :350
+fitness: 0.029988 with prob1: 0.4 prob2 : 0.5
+number of cars in road1 is :500 number of cars in road2 is :400
+fitness: 0.0303146 with prob1: 0.4 prob2 : 0.5
+number of cars in road1 is :500 number of cars in road2 is :450
+fitness: 0.0306191 with prob1: 0.4 prob2 : 0.4
+number of cars in road1 is :500 number of cars in road2 is :500
+fitness: 0.030876 with prob1: 0.4 prob2 : 0.4
+number of cars in road1 is :550 number of cars in road2 is :200
+fitness: 0.0284586 with prob1: 0.4 prob2 : 0.7
+number of cars in road1 is :550 number of cars in road2 is :250
+fitness: 0.0291972 with prob1: 0.4 prob2 : 0.6
