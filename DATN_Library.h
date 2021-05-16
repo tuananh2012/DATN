@@ -26,7 +26,8 @@ namespace DATN
     {
     public:
         static double squareIntegral(double low, double high, double f(double,vector<double>), vector<double> p, double step);
-        static double trapezoiIntegral(double low, double high, double f(double), double step);
+        static double trapezoidIntegral(double low, double high, double f(double,vector<double>), vector<double> p, double step);
+        static double simpsonIntergral(double low, double high, double f(double,vector<double>), vector<double> p, double step);
     };
     class ABC
     {

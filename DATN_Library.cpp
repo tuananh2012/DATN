@@ -34,22 +34,36 @@ namespace DATN
         for (double cur = low; cur + step <= high; cur += step)
         {
             double mid = cur + step / 2;
-            ans += f(mid, p) * step;
+            ans += f(mid, p) ;
             // cnt ++;
             // if(cnt < 10) cout << mid << " "  << f(mid,p) << endl;
         }
-        return ans;
+        return ans * step;
     }
-
-    double Integration ::trapezoiIntegral(double low, double high, double f(double), double step)
+    double Integration ::trapezoidIntegral(double low, double high, double f(double,vector<double>), vector<double> p, double step)
     {
         double ans = 0;
         for (double cur = low; cur + step <= high; cur += step)
         {
-            double mid = (f(cur) + f(cur + step)) / 2;
-            ans += mid * step;
+            double mid = (f(cur,p) + f(cur + step,p)) / 2;
+            ans += mid ;
         }
-        return ans;
+        return ans*step;
+    }
+    double Integration :: simpsonIntergral(double low, double high, double f(double,vector<double>), vector<double> p, double step){
+        double ans = 0;
+        int cnt = 0;
+        for (double cur = low; cur + step <= high; cur += step)
+        {
+            if(cnt&1){
+                ans += (f(cur,p) * 4);
+            }
+            else ans += (f(cur,p) * 2); 
+            cnt++;
+        }
+        ans -= (f(low,p) + f(high,p));
+        ans *= step/3;
+        return  ans;
     }
 
     ABC ::ABC(int x, int y, int z, int t, function<double(vector<double>)> fi)
