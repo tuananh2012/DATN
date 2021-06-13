@@ -29,7 +29,7 @@ namespace DATN
         static double trapezoidIntegral(double low, double high, double f(double,vector<double>), vector<double> p, double step);
         static double simpsonIntergral(double low, double high, double f(double,vector<double>), vector<double> p, double step);
     };
-    class ABC
+    class ABC1
     {
 
     public:
@@ -41,7 +41,7 @@ namespace DATN
         double ans;
         function<double(vector<double>)> f;
         vector<foodSource> food_source;
-        ABC(int x,int y,int z,int t,std:: function<double(vector<double>)> f);
+        ABC1(int x,int y,int z,int t,std:: function<double(vector<double>)> f);
         void calcFitness();
         void calcProb();
         void sendEmployee(int index);
@@ -62,6 +62,7 @@ namespace DATN
         vector<particle> swarm;
         PSO(int nbParticles, int nbDimensions, int nbIteration, double xMax,double xMin, double vMax, double vMin , double w,double c1,double c2, function < double (vector<double>)> f);
         void optimizer();
+        void optimizer1();
     };
 
 } // namespace DATN

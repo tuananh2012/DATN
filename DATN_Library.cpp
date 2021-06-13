@@ -1,5 +1,11 @@
 #include "DATN_Library.h"
 
+#ifdef _WIN32
+#include <Windows.h>
+#else
+#include <unistd.h>
+#endif
+
 #include <bits/stdc++.h>
 
 #define PI 3.141592654
@@ -10,6 +16,36 @@
 
 namespace DATN
 {
+    double calculateDiversity(vector<vector<double>> swarm)
+    {
+        int num = swarm.size();
+        int dimension = swarm[0].size();
+        vector<double> mean(dimension, 0);
+        for (int i = 0; i < num; i++)
+        {
+            for (int j = 0; j < dimension; j++)
+            {
+                mean[j] += swarm[i][j];
+            }
+        }
+        for (int i = 0; i < dimension; i++)
+        {
+            mean[i] /= num;
+        }
+        double ans = 0;
+        for (auto i : swarm)
+        {
+            double temp = 0;
+            for (int j = 0; j < dimension; j++)
+            {
+                temp += (mean[j] - i[j]) * (mean[j] - i[j]);
+            }
+            temp /= dimension;
+            ans += temp;
+        }
+        ans /= num;
+        return ans;
+    }
 
     double Basic_computation ::arcArea(double disToCenter, double radius)
     {
@@ -34,39 +70,42 @@ namespace DATN
         for (double cur = low; cur + step <= high; cur += step)
         {
             double mid = cur + step / 2;
-            ans += f(mid, p) ;
+            ans += f(mid, p);
             // cnt ++;
             // if(cnt < 10) cout << mid << " "  << f(mid,p) << endl;
         }
         return ans * step;
     }
-    double Integration ::trapezoidIntegral(double low, double high, double f(double,vector<double>), vector<double> p, double step)
+    double Integration ::trapezoidIntegral(double low, double high, double f(double, vector<double>), vector<double> p, double step)
     {
         double ans = 0;
         for (double cur = low; cur + step <= high; cur += step)
         {
-            double mid = (f(cur,p) + f(cur + step,p)) / 2;
-            ans += mid ;
+            double mid = (f(cur, p) + f(cur + step, p)) / 2;
+            ans += mid;
         }
-        return ans*step;
+        return ans * step;
     }
-    double Integration :: simpsonIntergral(double low, double high, double f(double,vector<double>), vector<double> p, double step){
+    double Integration ::simpsonIntergral(double low, double high, double f(double, vector<double>), vector<double> p, double step)
+    {
         double ans = 0;
         int cnt = 0;
         for (double cur = low; cur + step <= high; cur += step)
         {
-            if(cnt&1){
-                ans += (f(cur,p) * 4);
+            if (cnt & 1)
+            {
+                ans += (f(cur, p) * 4);
             }
-            else ans += (f(cur,p) * 2); 
+            else
+                ans += (f(cur, p) * 2);
             cnt++;
         }
-        ans -= (f(low,p) + f(high,p));
-        ans *= step/3;
-        return  ans;
+        ans -= (f(low, p) + f(high, p));
+        ans *= step / 3;
+        return ans;
     }
 
-    ABC ::ABC(int x, int y, int z, int t, function<double(vector<double>)> fi)
+    ABC1 ::ABC1(int x, int y, int z, int t, function<double(vector<double>)> fi)
     {
         time_t ti;
         srand((unsigned)time(&ti));
@@ -98,7 +137,7 @@ namespace DATN
         food_source = res;
     }
 
-    void ABC::calcFitness()
+    void ABC1::calcFitness()
     {
         for (int i = 0; i < nbFoodSource; i++)
         {
@@ -106,7 +145,7 @@ namespace DATN
         }
     }
 
-    void ABC ::calcProb()
+    void ABC1 ::calcProb()
     {
         double cur = 0;
         for (int i = 0; i < nbFoodSource; i++)
@@ -119,15 +158,14 @@ namespace DATN
         }
     }
 
-    double ABC ::fitnessFunction(double x)
+    double ABC1 ::fitnessFunction(double x)
     {
         if (x >= 0)
             return 1.0 / (1 + x);
         else
             return 1 - x;
     }
-
-    void ABC ::sendEmployee(int i)
+    void ABC1 ::sendEmployee(int i)
     {
         int neibor = i;
         while (neibor == i)
@@ -139,10 +177,7 @@ namespace DATN
         auto neiborPos = food_source[neibor].pos[paramToChange];
         while (true)
         {
-            double test = curPos;
-            if (rand_range(1, 5) <= 0)
-                test = globalBest[paramToChange];
-            double newPos = test + 2.0 * (rand_01 - 0.5) * (curPos - neiborPos);
+            double newPos = curPos + 2 * (rand_01 - 0.5) * (curPos - neiborPos);
             if (newPos > 0.0 && newPos < 1.0)
             {
                 food_source[i].pos[paramToChange] = newPos;
@@ -170,7 +205,7 @@ namespace DATN
         }
     }
 
-    void ABC ::sendOnlookers()
+    void ABC1 ::sendOnlookers()
     {
         calcProb();
         int foodIndex = 0, onlookerIndex = 0;
@@ -189,7 +224,7 @@ namespace DATN
         }
     }
 
-    void ABC ::sendScout(int i)
+    void ABC1 ::sendScout(int i)
     {
         if (food_source[i].trials > maxTrials)
         {
@@ -208,7 +243,7 @@ namespace DATN
         }
     }
 
-    void ABC ::optimizer()
+    void ABC1 ::optimizer()
     {
         const clock_t begin_time = clock();
         for (int t = 0; t < nbIterations; t++)
@@ -250,7 +285,7 @@ namespace DATN
         {
             for (int j = 0; j < nbDimensions; j++)
             {
-                pos[j] = rand_01 * (xMax - xMin) + xMin;
+                pos[j] = (rand_01 * (xMax - xMin) + xMin);
             }
             sw[i].pos = pos;
             // for(auto ss : sw[i].pos) cout << ss << endl;
@@ -272,7 +307,7 @@ namespace DATN
         const clock_t begin_time = clock();
         int tt = nbIterations;
         while (nbIterations--)
-        {
+        { 
             double ww = w - (0.8 * w) * ii / tt;
             ii++;
             for (int i = 0; i < nbParticles; i++)
@@ -296,14 +331,98 @@ namespace DATN
                     }
                 }
             }
-            cout << gBestValue << " " << ii + 1 << endl;
+            cout << setprecision(10)<< gBestValue << " " << ii + 1 << endl;
         }
         // cout << "fitness: " << gBestValue << endl;
         // cout << "params: "<< gBest.size();
-        // for(auto i : gBest){
+        // for (auto i : gBest)
+        // {
         //     cout << i << " ";
         // }
         // cout << endl;
+        // std::cout <<"time: " << float( clock () - begin_time ) /  CLOCKS_PER_SEC;
+    }
+       void PSO ::optimizer1()
+    {
+        int ii = 0;
+        const clock_t begin_time = clock();
+        int tt = nbIterations;
+        while (nbIterations--)
+        {
+            // if (nbIterations % 1000 == 0)
+            // {
+            //     vector<vector<double>> s;
+            //     int j = 0;
+            //     for (auto i : swarm)
+            //     {
+            //         s.push_back(i.pos);
+            //     }
+            //     cout << "divers: " << calculateDiversity(s) << endl;
+            //     Sleep(1000);
+            // }
+            if (nbIterations % 10 == 0)
+            {
+                for (int i = 0; i < nbParticles; i++)
+                {
+                    double vel = 0;
+                    for (int j = 0; j < nbDimensions; j++)
+                    {
+                        vel += swarm[i].velocity[j] * swarm[i].velocity[j];
+                    }
+                    vel /= nbDimensions;
+                    if (vel < 1e-8)
+                    {
+                        // cout << "update velocity" << endl;
+                        // int param = rand_range(0, nbDimensions - 1);
+                        // swarm[i].velocity[param] = (rand_01 * (vMax - vMin) + vMin) * 3;
+                        // cout << swarm[i].velocity[param] << endl;
+                        auto ra = (rand_01 * (vMax - vMin) + vMin) * 2;
+                        for(int j = 0; j < nbDimensions;j++){
+                            swarm[i].velocity[j] = ra;
+                        }
+                        // Sleep(100);
+                        // for (int j = 0; j < nbDimensions; j++)
+                        // {
+                        //     int k = rand_range(1,3);
+                        //     swarm[i].velocity[j] =  (rand_01 * (vMax-vMin) + vMin) * k ;
+                        //     cout << swarm[i].velocity[j] << " ";
+                        // }
+                        // cout << endl;
+                    }
+                }
+            }
+            double ww = w - (0.8 * w) * ii / tt;
+            ii++;
+            for (int i = 0; i < nbParticles; i++)
+            {
+                for (int j = 0; j < nbDimensions; j++)
+                {
+                    auto x = swarm[i].pos[j], v = swarm[i].velocity[j];
+                    v = ww * v + rand_01 * c1 * (swarm[i].pBest[j] - x) + rand_01 * c2 * (gBest[j] - x);
+                    swarm[i].velocity[j] = min(max(v, vMin), vMax);
+                    swarm[i].pos[j] = min(max(x + swarm[i].velocity[j], xMin), xMax);
+                }
+                auto val = this->f(swarm[i].pos);
+                if (val > swarm[i].pBestValue)
+                {
+                    swarm[i].pBestValue = val;
+                    swarm[i].pBest = swarm[i].pos;
+                    if (val > gBestValue)
+                    {
+                        gBestValue = val;
+                        gBest = swarm[i].pos;
+                    }
+                }
+            }
+            cout<< setprecision(10) << gBestValue << " " << ii  << endl;
+        }
+        // cout << "fitness: " << gBestValue << endl;
+        // cout << "params: "<< gBest.size();
+        for (auto i : gBest)
+        {
+            cout << i << " ";
+        }
+        cout << endl;
         // std::cout <<"time: " << float( clock () - begin_time ) /  CLOCKS_PER_SEC;
     }
 };
