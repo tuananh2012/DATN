@@ -45,9 +45,11 @@ namespace DATN
         void calcFitness();
         void calcProb();
         void sendEmployee(int index);
+        void sendEmployee1(int index);
         void sendOnlookers();
         void sendScout(int index);
         void optimizer();
+        void optimizer1();
         double fitnessFunction(double x);
     };
     class PSO{

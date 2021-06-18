@@ -165,6 +165,45 @@ namespace DATN
         else
             return 1 - x;
     }
+    void ABC1 ::sendEmployee1(int i)
+    {
+        int neibor = i;
+        while (neibor == i)
+        {
+            neibor = rand_range(0, nbFoodSource - 1);
+        }
+        int paramToChange = rand_range(0, nbDimensions - 1);
+        auto curPos = food_source[i].pos[paramToChange];
+        auto neiborPos = food_source[neibor].pos[paramToChange];
+        while (true)
+        {
+            double newPos = globalBest[paramToChange] + 2 * (rand_01 - 0.5) * (curPos - neiborPos);
+            if (newPos > 0.0 && newPos < 1.0)
+            {
+                food_source[i].pos[paramToChange] = newPos;
+                break;
+            }
+        }
+
+        auto newValue = this->f(food_source[i].pos);
+        auto fitness = fitnessFunction(newValue);
+        if (newValue < food_source[i].objFxValue)
+        {
+            food_source[i].fitness = fitness;
+            food_source[i].objFxValue = newValue;
+            food_source[i].trials = 0;
+            if (food_source[i].objFxValue < ans)
+            {
+                ans = food_source[i].objFxValue;
+                globalBest = food_source[i].pos;
+            }
+        }
+        else
+        {
+            food_source[i].trials++;
+            sendScout(i);
+        }
+    }
     void ABC1 ::sendEmployee(int i)
     {
         int neibor = i;
@@ -307,7 +346,7 @@ namespace DATN
         const clock_t begin_time = clock();
         int tt = nbIterations;
         while (nbIterations--)
-        { 
+        {
             double ww = w - (0.8 * w) * ii / tt;
             ii++;
             for (int i = 0; i < nbParticles; i++)
@@ -331,7 +370,7 @@ namespace DATN
                     }
                 }
             }
-            cout << setprecision(10)<< gBestValue << " " << ii + 1 << endl;
+            cout << setprecision(10) << gBestValue << " " << ii + 1 << endl;
         }
         // cout << "fitness: " << gBestValue << endl;
         // cout << "params: "<< gBest.size();
@@ -342,24 +381,18 @@ namespace DATN
         // cout << endl;
         // std::cout <<"time: " << float( clock () - begin_time ) /  CLOCKS_PER_SEC;
     }
-       void PSO ::optimizer1()
+    void PSO ::optimizer1()
     {
+        set<int> dim;
+        for (int i = 0; i < nbDimensions; i++)
+        {
+            dim.insert(i);
+        }
         int ii = 0;
         const clock_t begin_time = clock();
         int tt = nbIterations;
         while (nbIterations--)
         {
-            // if (nbIterations % 1000 == 0)
-            // {
-            //     vector<vector<double>> s;
-            //     int j = 0;
-            //     for (auto i : swarm)
-            //     {
-            //         s.push_back(i.pos);
-            //     }
-            //     cout << "divers: " << calculateDiversity(s) << endl;
-            //     Sleep(1000);
-            // }
             if (nbIterations % 10 == 0)
             {
                 for (int i = 0; i < nbParticles; i++)
@@ -372,22 +405,24 @@ namespace DATN
                     vel /= nbDimensions;
                     if (vel < 1e-8)
                     {
-                        // cout << "update velocity" << endl;
-                        // int param = rand_range(0, nbDimensions - 1);
-                        // swarm[i].velocity[param] = (rand_01 * (vMax - vMin) + vMin) * 3;
-                        // cout << swarm[i].velocity[param] << endl;
-                        auto ra = (rand_01 * (vMax - vMin) + vMin) * 2;
-                        for(int j = 0; j < nbDimensions;j++){
-                            swarm[i].velocity[j] = ra;
+                        auto randd = (rand_01 * (vMax - vMin) + vMin);
+                        int numberOfDimensionsToChange = rand_range(1, nbDimensions);
+                        set<int> dims = dim;
+                        vector<int> changeDim;
+                        while (numberOfDimensionsToChange--)
+                        {
+                            int ra = rand_range(0, nbDimensions - 1);
+                            while (dims.find(ra) == dims.end())
+                            {
+                                ra = rand_range(0, nbDimensions - 1);
+                            }
+                            changeDim.push_back(ra);
+                            dims.erase(ra);
                         }
-                        // Sleep(100);
-                        // for (int j = 0; j < nbDimensions; j++)
-                        // {
-                        //     int k = rand_range(1,3);
-                        //     swarm[i].velocity[j] =  (rand_01 * (vMax-vMin) + vMin) * k ;
-                        //     cout << swarm[i].velocity[j] << " ";
-                        // }
-                        // cout << endl;
+                        for (auto d : changeDim)
+                        {
+                            swarm[i].velocity[d] = randd;
+                        }
                     }
                 }
             }
@@ -414,10 +449,9 @@ namespace DATN
                     }
                 }
             }
-            cout<< setprecision(10) << gBestValue << " " << ii  << endl;
+            cout << setprecision(10) << gBestValue << " " << ii << endl;
         }
-        // cout << "fitness: " << gBestValue << endl;
-        // cout << "params: "<< gBest.size();
+
         for (auto i : gBest)
         {
             cout << i << " ";
