@@ -1,0 +1,24 @@
+1.205141433     1.305788669     0.4055697567
+1.09693985      1.208249674     0.3624787128
+1.043471108     1.112284607     0.3519127253
+0.8488138585    0.9502384887    0.247373037
+0.6206894354    0.9504636203    0.2178547608
+0.455992933     0.9506105568    0.161960267
+ket qua 3 thuat toan voi cij = 0.01*rand(0,1)
+PSO            PSO-Based           ABC
+1.059018383	1.30789071	0.3931407987
+ket qua 3 thuat toan voi cij = 0.05*rand(0,1)
+PSO            PSO-Based           ABC
+1.095480902	1.200791095	0.3793639393
+ket qua 3 thuat toan voi cij = 0.1*rand(0,1)
+PSO            PSO-Based           ABC
+1.099771394	1.113268599	0.3293073809
+ket qua 3 thuat toan voi cij = 0.3*rand(0,1)
+PSO            PSO-Based           ABC
+0.8081305949	0.9504257151	0.2563766704
+ket qua 3 thuat toan voi cij = 0.5*rand(0,1)
+PSO            PSO-Based           ABC
+0.7977165914	0.9502602625	0.2285889254
+ket qua 3 thuat toan voi cij = 1*rand(0,1)
+PSO            PSO-Based           ABC
+0.3714011161	0.9505360754	0.1582143357
