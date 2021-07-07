@@ -3,7 +3,7 @@
 using namespace std;
 using namespace DATN;
 const int radius = 100000;
-vector<double> le{0, 80000, 200000, 250000, 370000}, ri{20000, 105000, 215000, 280000, 400000}, lambda{0.0000000008, 0.0000000002, 0.0000000005, 0.000000003, 0.00000000004};
+vector<double> le{0, 80000, 200000, 250000, 370000}, ri{20000, 105000, 215000, 280000, 400000}, lambda{0.0000000008, 0.0000000002, 0.0000000005, 0.00000003, 0.00000000004};
 double val;
 double calcProbability(double x, vector<double> p)
 {
@@ -35,10 +35,10 @@ double f2(vector<double> p, double step)
 }
 int main()
 {
-    for (int i = 1; i < 100000; i++)
+    for (int i = 1; i < 100000; i *= 10)
     {
-        cout << setprecision(15) << "Tong Reimann giua voi delta x = " << i << ":" << f({1, 1, 1, 1, 1}, i) << endl;
+        cout << setprecision(15) << "Tong Reimann giua voi delta x = " << i << ": " << f({1, 1, 1, 1, 1}, i) << endl;
         cout << setprecision(15) << "Luat hinh thang voi delta x = " << i << ":" << f1({1, 1, 1, 1, 1}, i) << endl;
-        cout <<  setprecision(15) <<"Luat Simpson voi delta x = "<< i <<":" << f2({1,1,1,1,1},i) << endl;
+        cout << setprecision(15) << "Luat Simpson voi delta x = " << i << ":" << f2({1, 1, 1, 1, 1}, i) << endl;
     }
 }

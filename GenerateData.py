@@ -9,10 +9,10 @@ xDelta=xMax-xMin;yDelta=yMax-yMin #rectangle dimensions
 areaTotal=xDelta*yDelta
  
 #Point process parameters
-lambda0=0.0000000003 #intensity (ie mean density) of the Poisson process./
+lambda0=0.0000000001 #intensity (ie mean density) of the Poisson process./
  
 #Simulate Poisson point process
-f = open("dataServer.txt", "w")
+f = open("data.txt", "w")
 numOfTest = 1000
 f.write(str(numOfTest) + "\n")
 while numOfTest >= 0 :

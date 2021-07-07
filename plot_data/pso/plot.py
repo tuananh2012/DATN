@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-with open('plot_6_0.25.txt') as f:
+with open('plot_pso_2.txt') as f:
     data = [[float(line.split()[0]), int(line.split()[1])] for line in f.readlines()]
 fig = plt.figure(dpi=150)
 ax = fig.add_subplot(111)

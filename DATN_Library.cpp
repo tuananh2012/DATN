@@ -57,8 +57,11 @@ namespace DATN
 
     double Basic_computation ::calculateAreaInRoad(double distance1, double distance2, double radius, double width)
     {
-        if (distance1 + distance2 > width)
+        if (distance1 + distance2 > width )
+        {
+            distance1 = min(distance1, distance2);
             return arcArea(distance1, radius) - arcArea(distance1 + width, radius);
+        }
         else
             return (PI * radius * radius - arcArea(distance1, radius) - arcArea(distance2, radius));
     }
@@ -281,6 +284,19 @@ namespace DATN
             }
         }
     }
+    void ABC1 ::optimizer1()
+    {
+        const clock_t begin_time = clock();
+        for (int t = 0; t < nbIterations; t++)
+        {
+            for (int i = 0; i < nbFoodSource; i++)
+            {
+                sendEmployee1(i);
+            }
+            sendOnlookers();
+            cout << -ans << " " << t + 1 << endl;
+        }
+    }
 
     void ABC1 ::optimizer()
     {
@@ -374,11 +390,11 @@ namespace DATN
         }
         // cout << "fitness: " << gBestValue << endl;
         // cout << "params: "<< gBest.size();
-        // for (auto i : gBest)
-        // {
-        //     cout << i << " ";
-        // }
-        // cout << endl;
+        for (auto i : gBest)
+        {
+            cout << i << " ";
+        }
+        cout << endl;
         // std::cout <<"time: " << float( clock () - begin_time ) /  CLOCKS_PER_SEC;
     }
     void PSO ::optimizer1()

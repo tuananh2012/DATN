@@ -1,55 +1,83 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 #include "DATN_Library.cpp"
 using namespace std;
 using namespace DATN;
 const int radius = 100000;
-vector<double> le{0,80000,200000,250000,370000},ri{20000,105000,215000,280000,400000},lambda{0.000000008,0.000000002,0.000000005,0.000000003,0.0000000004};
+vector<double> le{0, 80000, 200000, 250000, 370000}, ri{20000, 105000, 215000, 280000, 400000}, lambda{0.0000000008, 0.0000000002, 0.0000000005, 0.00000003, 0.00000000004};
 double val;
-double calcProbability(double x, vector<double> p){
+double calcProbability(double x, vector<double> p)
+{
     double ans = 0;
-    for(int i = 0; i < le.size();i++){
-        ans += p[i] * lambda[i] * Basic_computation::calculateAreaInRoad(abs(x-le[i]),abs(x-ri[i]),radius,ri[i]-le[i]);
+    for (int i = 0; i < le.size(); i++)
+    {
+        ans += p[i] * lambda[i] * Basic_computation::calculateAreaInRoad(abs(x - le[i]), abs(x - ri[i]), radius, ri[i] - le[i]);
     }
-   // cout << ans << endl;
-    return 1-exp(-ans);
+    // cout << ans << endl;
+    return 1 - exp(-ans);
 }
-double costFunction(vector<double> p){
-    double ans = 0.1;
-    for(auto i : p) ans += i;
-    for(auto i : p){
-        for(auto j : p){
-            ans += 0.35 * abs(i-j);
+double costFunction(vector<double> p)
+{
+    double ans = 6;
+    for (auto i : p)
+        ans += i;
+    for (auto i : p)
+    {
+        for (auto j : p)
+        {
+            ans += 0.2 * abs(i - j);
         }
     }
     //for(auto i : p) ans += sqrt(i);
-    return ans/10000;
+    return ans / 10000;
 }
-double f(vector<double>p){
+double f(vector<double> p)
+{
     double low = le[0] - radius;
     double high = *ri.rbegin() + radius;
-    return Integration:: squareIntegral(low,high,calcProbability,p,1000)/(2 * radius + *ri.rbegin() - le[0])/costFunction(p);
+    return Integration::squareIntegral(low, high, calcProbability, p, 1000) / (2 * radius + *ri.rbegin() - le[0])/ costFunction(p);
 }
-double ff(vector<double> p){
-    return  (f(p) - val);
+double ff(vector<double> p)
+{
+    return (f(p) - val);
 }
-double f2(vector<double> p){
+double f2(vector<double> p)
+{
     return -(f(p) - val);
 }
-int main(){
-   // cout << Basic_computation :: arcArea(65000,100000) << endl;
-   // cout << f({0.407117,0.246773,0.366436}) << endl;
-    vector<double> xxx(le.size(),0.35);
+int main()
+{
+    // cout << Basic_computation :: arcArea(65000,100000) << endl;
+    // cout << f({0.407117,0.246773,0.366436}) << endl;
+    vector<double> xxx(le.size(), 0.35);
+    // xxx = {1,1,1,0.952990563,1};
     val = f(xxx);
-    // cout << val << endl;
+    cout << val << endl;
     //freopen("plotabc.txt","w",stdout);
-    auto obj = new ABC1(10,le.size(),1000,30,f2);
-    // const clock_t begin_time = clock();
-   //obj->optimizer();
+    auto obj = new ABC1(10, le.size(), 1000, 30, f2);
+    const clock_t begin_time = clock();
+    //obj->optimizer();
     //fclose(stdout);
     // std::cout <<"time: " << float( clock () - begin_time ) /  CLOCKS_PER_SEC;
-   // freopen("plot_6_0.25.txt","w",stdout);
-    auto obj1 = new PSO(10,le.size(),1000,1,0,0.2,-0.2,0.8,2,2,ff);
-    obj1->optimizer();
+    // freopen("plot_pso_based.txt","w",stdout);
+    auto obj1 = new PSO(10, le.size(), 1000, 1, 0, 0.2, -0.2, 0.8, 0, 2, ff);
+    obj1 -> optimizer1();
+    // int t = 10;
+    // vector<double> ans;
+    // while (t--)
+    // {
+    //     /* code */
+    //      auto obj = new ABC1(10, le.size(), 500, 30, f2);
+    //     obj->optimizer();
+    //     ans.push_back(-obj->ans);
+    // }
+    // cout << *max_element(ans.begin(), ans.end()) << endl;
+    // cout << *min_element(ans.begin(), ans.end()) << endl;
+    // double temp = 0;
+    // for (auto i : ans)
+    // {
+    //     temp += i;
+    // }
+    // cout << temp / ans.size() << endl;
 
     // for(auto i : obj1->swarm){ 5.323067557 6.398218843 7.571627184  4.777248751 4.101984475
     // 5.55178235  7.557415157 5.616465112 3.426880523 7.112705674
@@ -64,10 +92,10 @@ int main(){
     //     }
     //     cout << endl;
     // }
-    auto obj2 = new PSO(10,le.size(),1000,1,0,0.2,-0.2,0.8,0,2,ff);
-    obj2 -> optimizer1();
+    // auto obj2 = new PSO(10,le.size(),1000,1,0,0.2,-0.2,0.8,0,2,ff);
+    // obj2 -> optimizer1();
     // 5.9251
-   //fclose(stdout);
+    //fclose(stdout);
     // double ans =0,x,y,z;
     // for(double p1 = 0.1;p1<=1;p1+=0.05){
     //     for(double p2 = 0.1;p2 <= 1;p2 += 0.05){

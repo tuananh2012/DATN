@@ -4,7 +4,7 @@ using namespace std;
 const int length = 10000000;// length of the road
 const int width = 25000;// width of the road
 const int radius = 100000; // R_0
-double lambda = 0.0000000002;
+double lambda = 0.000000003;
 const double PI = 3.141592654;
 const int k_max = 100;
 double dientichcungtron(int x){
@@ -40,7 +40,7 @@ double integral(double p){
         ans += test(p,x);
     }
  //   cout << ans << endl;
-    return 2 * ans * (length - 2 * radius);
+    return 2 * ans /(width + 2 * radius);
 }
 double costFunction(double p){
     return sqrt(sqrt(p));
@@ -83,5 +83,5 @@ void onePath(){
     }
 }
 int main(){
-    cout << findBestProb() << endl;
+    cout << integral(1) << endl;
 }

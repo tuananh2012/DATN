@@ -15,12 +15,12 @@ def get_data(file_path):
             k = []
             line = line.split()
             for j in line:
-                k.append(float(j)/10000)
+                k.append(float(j))
             output.append(k)
     return np.asarray(output).T
 
 
-def line_chart(models, data_matrix, x_label, y_label, title, xpoints, higher_models=[], name=None, maxx=10000):
+def line_chart(models, data_matrix, x_label, y_label, title, xpoints, higher_models=[], name=None, maxx=0.9):
     styles = ['o', 's', 'd', '^', 'x', '*', 'v', '<']
     #styles = ['o', 's', 'v', '*']
     line_styles = ['-', '--', '-', '-.', ':', '-', '--']
@@ -72,9 +72,9 @@ models = ['PSO', 'PSO-Based','ABC']
 xpoint_del_nodes = {"xp": ["01", "0.15",
                            "0.2"], "xlabel": "Train ratio"}
 ylabel = "Optimal Result"
-maxx = 0.9
+maxx = 1.2
 
-file_names = ['data/xtest.txt']
+file_names = ['data/test.txt']
 for index, file_name in enumerate(file_names):
     accs = get_data(file_name)
     name = 'yyy'

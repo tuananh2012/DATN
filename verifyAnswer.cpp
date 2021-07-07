@@ -1,12 +1,14 @@
 #include<bits/stdc++.h>
+#include"DATN_Library.cpp"
 using namespace std;
+using namespace DATN;
 #define ll long long
+
 const ll length = 10000000;// length of the road
 const ll width = 25000;// width of the road
 const ll radius = 100000; // R_0
-const ll PI = 3.141592654;
 const int k_max = 50;
-
+vector<double> le{0},ri{25000},lambda{0.0000000001};
 vector<pair<ll,ll>> generateRandom(int numOfPoints){
     vector<pair<ll,ll>> ans(numOfPoints);
     random_device rd;
@@ -16,15 +18,31 @@ vector<pair<ll,ll>> generateRandom(int numOfPoints){
   uniform_int_distribution<long long unsigned> distribution(0,0xFFFFFFFFFFFFFFFF);
     for (int i = 0; i < numOfPoints; i++) {
       int x = distribution(generator) % (radius * 2 + width);
-      int y = distribution(generator) % (length  + 2 * radius);
+      int y = distribution(generator) % (length  - 2 * radius);
       x -= radius;
-      y -= radius;
+      y += radius;
       ans[i] = {x,y};
   }
   return ans;
 }
+
+double calcProbability(double x, vector<double> p){
+    double ans = 0;
+    for(int i = 0; i < le.size();i++){
+        ans += p[i] * lambda[i] * Basic_computation::calculateAreaInRoad(abs(x-le[i]),abs(x-ri[i]),radius,ri[i]-le[i]);
+    }
+   // cout << ans << endl;
+    return 1-exp(-ans);
+}
+double f(vector<double> p)
+{
+    double low = -100000;
+    double high = 125000;
+    return Integration::squareIntegral(low, high, calcProbability, p, 1) / (2 * radius + width);
+}
 int main(){
-    int num = 1000;
+    srand(time(NULL));
+    int num = 500;
     ll ans = 0;
     auto p = generateRandom(num);
     freopen("data.txt","r",stdin);
@@ -56,5 +74,6 @@ int main(){
         ans += cur;
     }
     
-    cout << (double) ans/res;
+    cout << (double) ans/res << endl;
+    cout << f({1}) << endl;
 }
